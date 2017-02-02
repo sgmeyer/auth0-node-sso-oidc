@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  img(src="#{user.picture}")
+  h2 Welcome #{user.nickname}!
+  br
+  a(href='/logout') Logout
+  br
+  a(href='/user/profile') Switch Audience via link to hosted page
+  br
+  a(href='#' onclick='newAudience()') Swith Audience via JavaScript call to hosted page
+
+  script(src="//cdn.auth0.com/js/auth0/8.2.0/auth0.min.js")
+  script.
+    function newAudience() {
+      var auth = new auth0.WebAuth({
+        domain: 'custome-demos.auth0.com',
+        clientID: '27xY8Zb26of3QhLyA0qFxthS536nS6fd'
+      });
+
+      auth.authorize({
+        audience: 'https://shawnmeyer.com',
+        scope: 'read:users',
+        redirectUri: 'http://localhost:3000/callback',
+        responseType: 'code'
+      });
+    }
+    

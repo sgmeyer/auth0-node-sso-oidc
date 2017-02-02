@@ -1,0 +1,16 @@
+html
+  head
+    script(src="https://cdn.auth0.com/js/auth0/8.0.4/auth0.min.js")
+    script(type="text/javascript")
+      var webAuth = new auth0.WebAuth({
+        domain: 'customer-demos.auth0.com',
+        audience: 'https://sgmeyer.com',
+        scope: 'read:users',
+        clientID: '27xY8Zb26of3QhLyA0qFxthS536nS6fd'
+      });
+      var result = auth0.parseHash(window.location.hash, function(err, data) {
+        parent.postMessage(err || data, "http://localhost:3000/");
+      });
+  head
+  body
+html
